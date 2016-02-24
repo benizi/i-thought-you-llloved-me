@@ -1,0 +1,16 @@
+#!/bin/sh
+base="https://frinkiac.com/meme/S07E05/296228.jpg?b64lines="
+socat tcp-listen:$PORT,reuseaddr,fork,crlf \
+  system:'echo HTTP/1.1 301 OK;'\
+'echo Content-Length\:\ 0;'\
+'printf Location\:%s "\\ '$base'";'\
+'sed -e "s/^GET..//" -e "s/[[:space:]].*//" -e 1q |'\
+'tr a-z A-Z |'\
+'tr -c -d A-Z |'\
+'sed -e "s/^/8P-P-PLEASE,8/" '\
+'-e "s/$/,8I98THOUGHT8YOU8L-L-LOVED8ME,98L-L-LOVED8ME.9/" |'\
+'tr 89 \\\\040\\\\n |'\
+'base64 -i -w 0;'\
+'echo;'\
+'echo Connection\:\ close;'\
+'echo'
