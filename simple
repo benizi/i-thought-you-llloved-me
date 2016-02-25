@@ -9,6 +9,8 @@ base64="$(cat <<MESSAGE | base64 -i -w 0
 MESSAGE
 )"
 
+if test -n "$REDIRECT"
+then
 cat <<RESPONSE
 HTTP/1.1 301 OK
 Content-Length: 0
@@ -16,3 +18,5 @@ Location: $url$base64
 Connection: close
 
 RESPONSE
+else curl -si "$url$base64"
+fi
