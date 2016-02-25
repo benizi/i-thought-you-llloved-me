@@ -8,4 +8,4 @@ base64="$(cat <<MESSAGE | base64 -i -w 0
  L-L-LOVED ME.
 MESSAGE
 )"
-curl -si "$url$base64"
+curl --http1.0 -si "$url$base64"
