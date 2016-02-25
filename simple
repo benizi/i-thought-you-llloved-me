@@ -8,25 +8,4 @@ base64="$(cat <<MESSAGE | base64 -i -w 0
  L-L-LOVED ME.
 MESSAGE
 )"
-
-# Just redirect to Frinkiac
-if test -n "$REDIRECT" && test "$method" != "X-GET"
-then
-cat <<RESPONSE
-HTTP/1.1 302 Found
-Content-Length: 0
-Location: $url$base64
-Connection: close
-
-RESPONSE
-exit
-fi
-
-# Serve the Frinkiac content directly
-response="$(mktemp)"
-rmtmp() {
-  test -n "$response" && rm "$response"
-}
-trap rmtmp INT QUIT HUP EXIT
-curl -si -o "$response" "$url$base64"
-cat "$response"
+curl -si "$url$base64"
