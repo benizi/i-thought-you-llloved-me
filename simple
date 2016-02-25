@@ -10,7 +10,7 @@ MESSAGE
 )"
 
 cat <<RESPONSE
-HTTP/1.1 301 OK
+HTTP/1.1 302 Found
 Content-Length: 0
 Location: $url$base64
 Connection: close
