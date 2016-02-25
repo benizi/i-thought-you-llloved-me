@@ -1,7 +1,7 @@
 #!/bin/sh
 read method path rest || exit
 url="https://frinkiac.com/meme/S07E05/296228.jpg?b64lines="
-name="$(echo "${path#/}" | tr a-z A-Z)"
+name="$(echo "${path#/}" | perl -Mbytes -pe '$_=uc;s/%([0-9A-F]{2})/chr hex $1/ge')"
 base64="$(cat <<MESSAGE | base64 -i -w 0
  P-P-PLEASE, $name, I
  THOUGHT YOU L-L-LOVED ME,
