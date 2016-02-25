@@ -9,7 +9,7 @@ base64="$(cat <<MESSAGE | base64 -i -w 0
 MESSAGE
 )"
 
-if test -n "$REDIRECT"
+if test -n "$REDIRECT" && test "$method" != "X-GET"
 then
 cat <<RESPONSE
 HTTP/1.1 301 OK
